@@ -1,52 +1,61 @@
 
-class Person {
-    constructor(name = 'Anonymous', age = 0) {
-        this.name = name;
-        this.age = age;
-    }
-    getGreeting() {
-        return `${this.name} is ${this.age} year(s) old. `
-    }
-}
+// take name and age ( default to 0)
 
-class Student extends Person {
-    constructor(name, age, major) {
-        super(name, age);
-        this.major = major;
-    }
-    hasMajor() {
-        return !!this.major
-    }
-    getGreeting() {
-        let description = super.getGreeting();
+ class Person {
+   constructor(name = 'Anonymous', age = 0){
+     this.name = name;
+      this.age = age;
+   }
+   getGreeting() {
+     return `Hi, I am ${this.name}!`;
+   }
+   getDescription() {
+     return `${this.name} is ${this.age} year(s) old.`
+   }
+ }
 
-        if(this.hasMajor()){
-            description = description += `Their major is ${this.major}.`
-        }
-        return description;
-    }
-}
+ class Student extends Person {
+  constructor(name, age, major) {
+    super(name, age);
+    this.major = major;
+  }
+  hasMajor() {
+    return !!this.major;
+  }
+  getDescription() {
+    let description = super.getDescription();
+    return description;
 
-class Traveler extends Person {
-    constructor(name, age, homeLocation) {
-        super(name, age);
-        this.homeLocation = homeLocation;
+    if(this.hasMajor()){
+      description += ` Their major is ${this.major}`;
     }
-    hasHomeLocation() {
-        return !!this.homeLocation;
+  }
+ }
+
+ //traveler extends person class
+ //add support for home location
+ //over ride get greeting
+
+ class Traveler extends Person {
+  constructor(name, age, homeLocation) {
+    super(name, age);
+    this.homeLocation = homeLocation;
+  }
+  hashomeLocation() {
+    return !!this.homeLocation;
+  }
+  getGreeting(){
+
+    let greeting = super.getGreeting();
+    if(this.hashomeLocation()) {
+      greeting += ` I'm visiting from ${this.homeLocation}`
     }
-    getGreeting() {
-        let description = super.getGreeting();
+    return greeting;
+  }
+ }
 
-        if(this.hasHomeLocation()) {
-            description = description += `His hometown is ${this.homeLocation}.`
-        }
-        return description;
-    }
-}
-
-const me = new Traveler('Van de Castro', 20, 'Philly');
-console.log(me.getGreeting());
-
-const other = new Student();
-console.log(other.getGreeting());
+ const me = new Traveler('Andrew Mead', 24, 'computer science');
+ const other = new Traveler();
+ console.log(me)
+ console.log(other)
+ console.log(me.getGreeting())
